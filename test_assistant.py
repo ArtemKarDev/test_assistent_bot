@@ -1,10 +1,3 @@
-# подключение библиотек
-# pip install pyTelegramBotAPI
-# pip install Faker
-# pip install wikipedia
-# для установки необходимо в файл requirements.text добавить строки
-# 'PyTelegramBotApi'
-# 'faker'
 import wikipedia
 from telebot import TeleBot, types
 from faker import Faker
@@ -25,15 +18,6 @@ card_systempay = ['Maestro', 'Mastercard', 'VISA', 'JCB']
 
 
 
-markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-btn1 = types.KeyboardButton("Спросить в Wiki")
-btn2 = types.KeyboardButton('JSON валидатор')
-btn3 = types.KeyboardButton("Пользовательские данные")
-btn4 = types.KeyboardButton('Номер Банковской карты')
-btn5 = types.KeyboardButton('КОТЭ')
-markup.add(btn1, btn2, btn3, btn4, btn5)
-
-
 # обработчик команды '/start'
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -42,12 +26,13 @@ def start(message):
     btn2 = types.KeyboardButton('JSON валидатор')
     btn3 = types.KeyboardButton("Пользовательские данные")
     btn4 = types.KeyboardButton('Номер Банковской карты')
-    btn5 = types.KeyboardButton('КОТЭ')
+    btn5 = types.KeyboardButton('КОТЭ1')
     markup.add(btn1, btn2, btn3, btn4, btn5)
     bot.send_message(message.chat.id, "Чего сделать?", reply_markup=markup)
 
 
 # обработчик всех остальных сообщений
+
 @bot.message_handler()
 def message_handler(message: types.Message):
     # проверяем текст сообщения на совпадение с текстом какой либо из кнопок
@@ -57,7 +42,7 @@ def message_handler(message: types.Message):
         btn2 = types.KeyboardButton('Mastercard')
         btn3 = types.KeyboardButton("Maestro")
         btn4 = types.KeyboardButton('JCB')
-        btn5 = types.KeyboardButton("В Главное Меню")
+        btn5 = types.KeyboardButton("В Главное Меню3")
         card_type_keybaord.add(btn1, btn2, btn3, btn4, btn5)
         bot.send_message(message.chat.id, "Выбери платёжную систему.", reply_markup=card_type_keybaord)
 
