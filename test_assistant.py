@@ -7,11 +7,11 @@ from secrets import token_urlsafe
 
 TOKEN_BOT = ''
 with open('token.txt','r') as f:
-    TOKEN_BOT = f.read()
+    TOKEN_BOT = f.read().rstrip()
 f.close()
 
 bot = TeleBot(token=TOKEN_BOT, parse_mode='html') # создание бота
-
+#bot.set_webhook()
 faker = Faker() # утилита для генерации номеров кредитных карт
 card_systempay = ['Maestro', 'Mastercard', 'VISA', 'JCB']
     #['maestro', 'mastercard', 'visa13', 'visa16', 'visa19', 'amex', 'discover', 'diners', 'jcb15', 'jcb16']
@@ -121,7 +121,7 @@ def message_handler(message: types.Message):
         bot.register_next_step_handler(message, get_user_data)
 
     elif message.text == 'Спросить в Wiki':
-        bot.send_message(message.chat.id, "Wikipedia слушает...")
+        bot.send_message(message.chat.id, "Wiki слушает...")
         bot.register_next_step_handler(message, ask_Wiki)
 
     elif message.text == 'JSON валидатор':
@@ -260,9 +260,10 @@ def ask_Wiki(message):
 
 # главная функция программы
 def main():
-    # запускаем нашего бота
+     # запускаем нашего бота
     bot.infinity_polling()
 
 
 if __name__ == '__main__':
     main()
+    #bot.infinity_polling()
